@@ -13,6 +13,7 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import SignInButton from "./signin/page";
+import { LoginButton } from "./components/LoginButton/page";
 
 //   {/* <div> */ }
 //   {/*   Welcome to our super cool page */ }
@@ -25,13 +26,16 @@ import SignInButton from "./signin/page";
 // {/* </div> */ }
 
 export default async function Home() {
-  const session = await getServerSession(authOptions)
-  if (!session) {
-    return <SignInButton />
-  }
-  console.log(session)
+  // const session = await getServerSession(authOptions)
+  // if (!session) {
+  //   redirect("/signin")
+  // }
+  // console.log(session)
   return (
-    <Dashboard />
+    <>
+      <LoginButton />
+      {/* <Dashboard /> */}
+    </>
   )
 }
 
