@@ -4,8 +4,10 @@ import { redirect } from 'next/navigation'
 
 const ServerProtectedPage = async () => {
   const session = await getServerSession(authOptions)
+  console.log(session)
   if (!session) {
-    redirect("/signin?callback=/protected/server")
+    redirect("/signin")
+    // redirect("/signin?callbackUrl=/protected/server")
   }
   return (<>
     <div className="container">
@@ -14,3 +16,5 @@ const ServerProtectedPage = async () => {
     </div>
   </>)
 }
+
+export default ServerProtectedPage;

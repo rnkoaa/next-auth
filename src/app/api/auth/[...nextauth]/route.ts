@@ -1,7 +1,5 @@
-import NextAuth from "next-auth/next"
-
 import GithubProviders from 'next-auth/providers/github'
-
+import NextAuth from "next-auth/next"
 
 export const authOptions = {
   providers: [
@@ -10,11 +8,11 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     })
   ],
+  pages: {
+    signIn: '/signin',
+    signOut: '/'
+  }
 }
-
-// pages: {
-//   signIn: '/signin'
-// }
 
 const handler = NextAuth(authOptions)
 

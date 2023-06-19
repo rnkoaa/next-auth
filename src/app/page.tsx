@@ -1,3 +1,4 @@
+
 // https://codepen.io/tutsplus/details/gOObdjQ
 import Footer from "./components/footer/page";
 import HeaderNav from "./components/header/page";
@@ -5,12 +6,32 @@ import Images from "./components/images/images";
 import SideBarNav from "./components/side-nav/page";
 
 import { MagnifyingGlassIcon, UserIcon } from "@heroicons/react/24/solid";
+import ClientProtectedPage from "./protected/client/page";
+import Link from "next/link";
+import Dashboard from "./components/Dashboard/dashboard";
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "./api/auth/[...nextauth]/route";
+import SignInButton from "./signin/page";
 
-export default function Home() {
+//   {/* <div> */ }
+//   {/*   Welcome to our super cool page */ }
+// {/*   <div> */ }
+// {/*     <Link href="/protected/server">Protected (server)</Link> */ }
+// {/*   </div> */ }
+// {/*   <div> */ }
+// {/*     <Link href="/protected/client">Protected (client)</Link> */ }
+// {/*   </div> */ }
+// {/* </div> */ }
+
+export default async function Home() {
+  const session = await getServerSession(authOptions)
+  if (!session) {
+    return <SignInButton />
+  }
+  console.log(session)
   return (
-    <div>
-      Welcome to our super cool page
-    </div>
+    <Dashboard />
   )
 }
 
